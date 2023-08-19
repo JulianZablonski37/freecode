@@ -4,7 +4,6 @@
 // init project
 var express = require('express');
 var app = express();
-
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
@@ -33,6 +32,18 @@ app.get('/api/',function(req,res){
   });
 })
 
+app.get('/api/whoami',function(req,res){
+  var myIpaddress;
+  fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => res.json({
+    ipaddress: data.ip ,
+    language:'Polish',
+    software:'my',
+  }));
+  
+})
+
 app.get("/api/:date",function(req,res){
 
   const date = new Date(req.params.date);
@@ -51,6 +62,7 @@ app.get("/api/:date",function(req,res){
       utc: date.toUTCString(),
     });
 })
+
 
 //Listen on port set in environment variable or default to 3000
 const listener = app.listen(process.env.PORT || 3000, function () {
