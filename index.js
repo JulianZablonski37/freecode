@@ -25,14 +25,16 @@ app.get("/api/hello", function (req, res) {
 });
 
 
+app.get('/api/',function(req,res){
+  const current = new Date();
+  return res.json({
+    unix: current.getTime(),
+    utc: current.toUTCString(),
+  });
+})
+
 app.get("/api/:date",function(req,res){
-  if (req.params.date === '' || req.params.date === undefined) {
-    const current = new Date();
-    return res.json({
-      unix: current.getTime(),
-      utc: current.toUTCString(),
-    });
-  }
+
   const date = new Date(req.params.date);
   if (date.toString() === 'Invalid Date') {
     const date2 = new Date(parseInt(req.params.date, 10));
