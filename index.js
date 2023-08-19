@@ -2,6 +2,8 @@
 // where your node app starts
 
 // init project
+
+var navigator= require('navigator');
 var express = require('express');
 var app = express();
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
@@ -33,13 +35,13 @@ app.get('/api/',function(req,res){
 })
 
 app.get('/api/whoami',function(req,res){
-  var myIpaddress;
+  let agent = navigator.userAgent;
   fetch('https://api.ipify.org?format=json')
   .then(response => response.json())
   .then(data => res.json({
     ipaddress: data.ip ,
     language:'Polish',
-    software:'my',
+    software:agent,
   }));
   
 })
