@@ -40,7 +40,7 @@ app.get('/api/whoami',function(req,res){
   .then(response => response.json())
   .then(data => res.json({
     ipaddress: data.ip ,
-    language:'Polish',
+    language:req.headers['accept-language'],
     software:agent,
   }));
   
